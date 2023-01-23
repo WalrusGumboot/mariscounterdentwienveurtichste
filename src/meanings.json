@@ -1,0 +1,20 @@
+{
+    "voor": [
+        { "z": "angst", "b": ["bang voor", "angstig voor"], "w": "vreest voor" },
+        { "z": "liefde", "b": ["verliefd op", "stapel op"], "w": "houdt van" }
+    ],
+    "naar": [
+        { "z": "verlangen", "b": ["op zoek naar"], "w": "verlangt naar" }
+    ],
+    "zn": [
+        "de dood",
+        "het leven",
+        "stabiliteit",
+        "tevredenheid",
+        "perfectie",
+        "imperfectie",
+        "balans",
+        "rust",
+        "kalmte"
+    ]
+}
