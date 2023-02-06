@@ -23,6 +23,11 @@
    maakTeller("ja", "Space", "spatie"),
  ];
 
+ let tijdGeladen = 1;
+ setInterval(() => tijdGeladen+=1, 1000);
+
+ $: totaal = tellers.map(e => e.aantal).reduce((a, b) => a + b, 0);
+ $: gemidd = Math.round(6000*totaal / tijdGeladen) / 100;
 
  function incr(i) {
    tellers[i].aantal = tellers[i].aantal + 1;
@@ -37,6 +42,16 @@ function keypress(e) {
 
    tellers = tellers;
 }
+
+ function hms(seconds) {
+  return [3600, 60]
+    .reduceRight(
+      (p, b) => r => [Math.floor(r / b)].concat(p(r % b)),
+      r => [r]
+    )(seconds)
+    .map(a => a.toString().padStart(2, '0'))
+    .join(':');
+}
 </script>
 
 <svelte:window on:keydown={keypress} />
@@ -44,7 +59,7 @@ function keypress(e) {
 <main>
   <div class="p-12 bg-violet-200 w-screen h-screen flex flex-col justify-center items-center">
     <h1 class="text-3xl font-bold pb-4">Mariscounter</h1>
-    <p class="text-stone-700 pb-8">joa heizoe kinste mekkelijk de weurde van dn Moaris telle eh</p>
+    <p class="text-stone-700 mb-8">joa heizoe kinste mekkelijk de weurde van dn Moaris telle eh</p>
 
     <div class="flex flex-row gap-6">
     {#each tellers as teller, i}
@@ -56,6 +71,10 @@ function keypress(e) {
       </div>
     {/each}
     </div>
+
+    <p class="text-stone-700 text-xl font-bold mt-8">totaal: {totaal}</p>
+    <p class="text-stone-700 text-xl">tijd verstreken sinds page load: {hms(tijdGeladen)}</p>
+    <p class="text-stone-700 text-xl">gemiddelde woorden per minuut: {gemidd}</p>
   </div>
 </main>
 
