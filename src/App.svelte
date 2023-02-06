@@ -2,23 +2,25 @@
  interface Teller {
    woord: string,
    aantal: number,
-   toets: string
+   toets: string,
+   visueletoets: string
  }
 
- function maakTeller(woord: string, toets: string): Teller {
+ function maakTeller(woord: string, toets: string, visueletoets: string): Teller {
    return {
      woord: woord,
      toets: toets,
-     aantal: 0
+     aantal: 0,
+     visueletoets: visueletoets
    }
  }
 
  let tellers = [
-   maakTeller("hè", "KeyQ"),
-   maakTeller("klaar", "KeyW"),
-   maakTeller("oké", "KeyE"),
-   maakTeller("ja", "Space"),
-   maakTeller("is goed", "KeyR"),
+   maakTeller("hè", "KeyQ", "A"),
+   maakTeller("klaar", "KeyW", "Z"),
+   maakTeller("oké", "KeyE", "E"),
+   maakTeller("in orde", "KeyR", "R"),
+   maakTeller("ja", "Space", "spatie"),
  ];
 
 
@@ -49,9 +51,26 @@ function keypress(e) {
       <div class="flex flex-col p-4 rounded-md shadow-sm bg-violet-300 items-center hover:scale-105 hover:shadow-md transition-all">
         <button on:click={() => incr(i)} class="px-6 py-2 mb-4 bg-violet-500 text-white text-xl font-bold rounded-md
                 hover:shadow-lg hover:bg-violet-600 active:bg-violet-900 transition-all">{teller.woord}</button>
-        <h2 class="text-2xl text-stone-800">{teller.aantal}</h2>
+        <h2 class="text-2xl text-stone-800 mb-2">{teller.aantal}</h2>
+        <kbd>{teller.visueletoets}</kbd>
       </div>
     {/each}
     </div>
   </div>
 </main>
+
+<style>
+ kbd {
+    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+    color: #333;
+    display: inline-block;
+    font-size: 0.85em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 4px 6px;
+    white-space: nowrap;
+}
+</style>
